@@ -1,0 +1,21 @@
+* {
+    font-family: 'Poppins', sans-serif;
+}
+
+.header {
+    user-select: none;
+}
+
+.footer {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    top: auto;
+    user-select: none;
+}
+
+.todoForm {
+    margin: auto;
+    width: 50% !important
+}
