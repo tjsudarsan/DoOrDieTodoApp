@@ -1,5 +1,5 @@
 * {
-    font-family: 'Poppins', sans-serif;
+    font-family: "Poppins", sans-serif;
 }
 
 .header {
@@ -17,5 +17,5 @@
 
 .todoForm {
     margin: auto;
-    width: 50% !important
+    width: 50% !important;
 }

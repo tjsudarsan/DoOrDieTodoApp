@@ -1,9 +1,9 @@
-import React from 'react'
-import './css/style.css'
+import React from "react";
+import "./css/style.css";
 
-import Header from './components/Header';
-import Footer from './components/Footer';
-import TodoBody from './components/TodoBody'
+import Header from "./components/Header";
+import Footer from "./components/Footer";
+import TodoBody from "./components/TodoBody";
 
 const App = () => {
     return (
@@ -14,7 +14,7 @@ const App = () => {
             </div>
             <Footer />
         </React.Fragment>
-    )
-}
+    );
+};
 
-export default App
+export default App;
