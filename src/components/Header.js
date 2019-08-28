@@ -17,8 +17,8 @@ class Header extends React.Component {
 
     render() {
         return (
-            <nav className="navbar navbar-dark bg-dark">
-                <span className="navbar-brand">
+            <nav id={""} className={"navbar navbar-dark bg-dark"}>
+                <span className={"navbar-brand"}>
                     <img
                         src={logo}
                         width="30"
