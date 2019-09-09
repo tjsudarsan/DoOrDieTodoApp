@@ -1,6 +1,8 @@
 import React from "react";
-import TodoForm from "./TodoForm";
 import uuid from "uuid/v4";
+
+import TodoForm from "./TodoForm";
+import TodoList from "./TodoList";
 
 class TodoBody extends React.Component {
   state = {
@@ -27,10 +29,10 @@ class TodoBody extends React.Component {
   };
 
   render() {
-    console.log(this.state.todoList);
     return (
       <React.Fragment>
         <TodoForm addTodoItem={this.addTodoItem} />
+        <TodoList list={this.state.todoList} />
       </React.Fragment>
     );
   }
