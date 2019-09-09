@@ -37,7 +37,6 @@ class TodoForm extends Component {
   };
 
   render() {
-    console.log(this.state.deadLine);
     return (
       <div className="row align-items-center">
         <div className="col-12" style={{ textAlign: "center" }}>
@@ -53,7 +52,7 @@ class TodoForm extends Component {
                 name="todoInput"
                 className="form-control"
                 placeholder="Enter Tasks"
-                value={this.state.todoText}
+                value={this.state.todoInput}
                 onChange={this.todoInputChange}
               />
               <DatePicker
