@@ -10,9 +10,11 @@ class TodoForm extends Component {
   };
 
   todoInputChange = e => {
-    this.setState({
-      todoInput: e.target.value
-    });
+    if (e.target.value.length <= 100) {
+      this.setState({
+        todoInput: e.target.value
+      });
+    }
   };
 
   handleDateChange = date => {
@@ -27,7 +29,13 @@ class TodoForm extends Component {
       if (this.state.deadLine) {
         let todoInput = this.state.todoInput;
         let deadLine = this.state.deadLine.toISOString();
-        this.props.addTodoItem(todoInput, deadLine);
+        let isSuccess = this.props.addTodoItem(todoInput, deadLine);
+        if (isSuccess) {
+          this.setState({
+            todoInput: "",
+            deadLine: ""
+          });
+        }
       } else {
         alert("Please select deadline");
       }
@@ -58,8 +66,10 @@ class TodoForm extends Component {
               <DatePicker
                 selected={this.state.deadLine}
                 onChange={this.handleDateChange}
+                todayButton="Today"
+                minDate={new Date()}
                 className="form-control"
-                placeholderText="Select date"
+                placeholderText="Select deadline"
                 dateFormat="MMM dd, yyyy"
                 name="deadLine"
               />
