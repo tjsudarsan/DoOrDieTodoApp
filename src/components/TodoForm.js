@@ -68,9 +68,10 @@ class TodoForm extends Component {
                 onChange={this.handleDateChange}
                 todayButton="Today"
                 minDate={new Date()}
+                showTimeSelect
                 className="form-control"
                 placeholderText="Select deadline"
-                dateFormat="MMM dd, yyyy"
+                dateFormat="MMM dd, yyyy h:mm aa"
                 name="deadLine"
               />
               <div className="input-group-append">
