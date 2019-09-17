@@ -23,7 +23,10 @@ class TodoItem extends Component {
             </div>
           </div>
           <div className="todo-content">
-            <span>Created {moment(this.props.createdAt).calendar()}</span>
+            <span>
+              Created{" "}
+              {moment(this.props.createdAt).calendar({ format: "dd/mm/yyyy" })}
+            </span>
             <h3>{this.props.todo}</h3>
           </div>
           <div className="deadline">
