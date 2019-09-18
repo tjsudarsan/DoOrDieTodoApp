@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import DatePicker from "react-datepicker";
+import { connect } from "react-redux";
 
 import "react-datepicker/dist/react-datepicker.css";
 
@@ -45,6 +46,7 @@ class TodoForm extends Component {
   };
 
   render() {
+    console.log(this.props);
     return (
       <div className="row align-items-center">
         <div className="col-12" style={{ textAlign: "center" }}>
@@ -87,4 +89,4 @@ class TodoForm extends Component {
   }
 }
 
-export default TodoForm;
+export default connect()(TodoForm);
