@@ -1,15 +1,7 @@
-import { createStore, combineReducers, applyMiddleware } from "redux";
-import thunk from "redux-thunk";
-import reduxLogger from "redux-logger";
+import { createStore } from "redux";
 
-import todoReducer from "./reducers/reducer-todo";
-import authReducer from "./reducers/reducer-auth";
+import reducers from "./reducer/rootReducers";
 
-const reducers = combineReducers({
-  auth: authReducer,
-  todo: todoReducer
-});
+const store = createStore(reducers);
 
-const middlewares = applyMiddleware(thunk, reduxLogger);
-
-export default createStore(reducers, middlewares);
+export default store;
