@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import DatePicker from "react-datepicker";
 import { connect } from "react-redux";
 
+import { addTodoItemAction } from "../redux/actions/actions-todo";
+
 import "react-datepicker/dist/react-datepicker.css";
 
 class TodoForm extends Component {
@@ -9,6 +11,10 @@ class TodoForm extends Component {
     deadLine: "",
     todoInput: ""
   };
+
+  componentDidMount() {
+    console.log(this.props);
+  }
 
   todoInputChange = e => {
     if (e.target.value.length <= 100) {
@@ -46,37 +52,35 @@ class TodoForm extends Component {
   };
 
   render() {
-    console.log(this.props);
     return (
       <div className="row align-items-center">
         <div className="col-12" style={{ textAlign: "center" }}>
-          <form
-            id="todoForm"
-            onSubmit={this.handleSubmit}
-            autoComplete="off"
-            className="form-inline"
-          >
-            <div className="input-group mb-3 todoForm">
-              <input
-                type="text"
-                name="todoInput"
-                className="form-control"
-                placeholder="Enter Tasks"
-                value={this.state.todoInput}
-                onChange={this.todoInputChange}
-              />
-              <DatePicker
-                selected={this.state.deadLine}
-                onChange={this.handleDateChange}
-                todayButton="Today"
-                minDate={new Date()}
-                showTimeSelect
-                className="form-control"
-                placeholderText="Select deadline"
-                dateFormat="MMM dd, yyyy h:mm aa"
-                name="deadLine"
-              />
-              <div className="input-group-append">
+          <form id="todoForm" onSubmit={this.handleSubmit} autoComplete="off">
+            <div className="form-row">
+              <div className="col-12 col-md-8">
+                <input
+                  type="text"
+                  name="todoInput"
+                  className="form-control"
+                  placeholder="Enter Tasks"
+                  value={this.state.todoInput}
+                  onChange={this.todoInputChange}
+                />
+              </div>
+              <div className="col-12 col-md-3">
+                <DatePicker
+                  selected={this.state.deadLine}
+                  onChange={this.handleDateChange}
+                  todayButton="Today"
+                  minDate={new Date()}
+                  showTimeSelect
+                  className="form-control"
+                  placeholderText="Select deadline"
+                  dateFormat="MMM dd, yyyy h:mm aa"
+                  name="deadLine"
+                />
+              </div>
+              <div className="col">
                 <button className="btn btn-success" type="submit">
                   Add
                 </button>
@@ -89,4 +93,12 @@ class TodoForm extends Component {
   }
 }
 
-export default connect()(TodoForm);
+const mapDispatchToProps = dispatch => ({
+  addTodoItem: (todoInput, deadLine) =>
+    dispatch(addTodoItemAction(todoInput, deadLine))
+});
+
+export default connect(
+  null,
+  mapDispatchToProps
+)(TodoForm);

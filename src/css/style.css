@@ -24,12 +24,6 @@ p {
   top: auto;
   user-select: none;
 }
-
-.todoForm {
-  margin: auto;
-  width: 50% !important;
-}
-
 .todo-item-body {
   display: flex;
   align-items: center;
@@ -47,4 +41,8 @@ p {
 .deadline > span,
 .todo-content > span {
   font-size: 13px;
+}
+
+.react-datepicker-wrapper {
+  width: 100% !important;
 }
