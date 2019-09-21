@@ -1,19 +1,16 @@
 const defaultState = {
-  list: []
+  list: [],
+  count: 5
 };
 
-const todoReducer = (state = defaultState, actions) => {
+export default (state = defaultState, actions) => {
   switch (actions.type) {
     case "ADD_TODO_ITEM":
-        let listCopy = state.list.slice();
-        listCopy.push(actions.payload);
-        return {
-          ...state,
-          list: listCopy
-        };
+      return {
+        ...state,
+        list: actions.payload
+      };
     default:
       return state;
   }
 };
-
-export default todoReducer;

@@ -1,22 +1,26 @@
 import uuid from "uuid/v4";
 
 export const addTodoItemAction = (todoInput, deadLine) => {
-  return dispatch => {
+  return (dispatch, getState) => {
     try {
-        let payload = {
-          id: uuid(),
-          todo: todoInput,
-          createdAt: new Date().toISOString(),
-          isCompleted: false,
-          completedAt: null,
-          deadLine
-        };
-        dispatch({
-          type: "ADD_TODO_ITEM",
-          payload
-        });
-      } catch (error) {
-        console.log(error);
-      }
+      let state = getState();
+      let newTodoItem = {
+        id: uuid(),
+        todo: todoInput,
+        isCompleted: false,
+        completedAt: null,
+        createdAt: new Date().toISOString(),
+        deadLine
+      };
+      let copy = state.todo.list.slice();
+      copy.push(newTodoItem);
+      dispatch({
+        type: "ADD_TODO_ITEM",
+        payload: copy
+      });
+    } catch (error) {
+      alert("Something Went Wrong");
+      console.log(error);
+    }
   };
 };

@@ -7,8 +7,9 @@ const TodoList = props => {
   return props.list.map(item => <TodoItem key={item.id} {...item} />);
 };
 
-const mapStateToProps = state => ({
-  list: state.todo.list
+const mapStateToProps = ({ todo }) => ({
+  list: todo.list,
+  count: todo.count
 });
 
 export default connect(mapStateToProps)(TodoList);
