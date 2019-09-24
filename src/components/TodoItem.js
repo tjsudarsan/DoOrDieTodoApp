@@ -1,5 +1,11 @@
 import React, { Component, Fragment } from "react";
 import moment from "moment";
+import { connect } from "react-redux";
+
+import {
+  deleteTodoItemAction,
+  completeTodo
+} from "../redux/actions/actions-todo";
 
 class TodoItem extends Component {
   render() {
@@ -12,13 +18,19 @@ class TodoItem extends Component {
               <input
                 type="checkbox"
                 className="custom-control-input"
-                id="customControlInline"
+                id={this.props.id}
                 checked={this.props.isCompleted}
                 disabled={this.props.isCompleted}
+                onChange={() => {
+                  console.log("click");
+                  if (window.confirm("Are you sure to mark as checked?")) {
+                    this.props.completeTodo(this.props.id);
+                  }
+                }}
               />
               <label
                 className="custom-control-label"
-                htmlFor="customControlInline"
+                htmlFor={this.props.id}
               ></label>
             </div>
           </div>
@@ -48,7 +60,11 @@ class TodoItem extends Component {
                 <i className="fas fa-pencil-alt"></i>
               </button>
               &nbsp; &nbsp;
-              <button className="btn btn-outline-danger" type="button">
+              <button
+                onClick={() => this.props.deleteTodo(this.props.id)}
+                className="btn btn-outline-danger"
+                type="button"
+              >
                 <i className="fas fa-trash"></i>
               </button>
             </div>
@@ -59,4 +75,12 @@ class TodoItem extends Component {
   }
 }
 
-export default TodoItem;
+const mapDispatchToProps = dispatch => ({
+  deleteTodo: id => dispatch(deleteTodoItemAction(id)),
+  completeTodo: id => dispatch(completeTodo(id))
+});
+
+export default connect(
+  null,
+  mapDispatchToProps
+)(TodoItem);

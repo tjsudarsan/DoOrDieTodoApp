@@ -24,3 +24,42 @@ export const addTodoItemAction = (todoInput, deadLine) => {
     }
   };
 };
+
+export const deleteTodoItemAction = id => {
+  return (dispatch, getState) => {
+    try {
+      const state = getState();
+      let listCopy = state.todo.list.slice();
+      let itemIndex = listCopy.findIndex(item => item.id === id);
+      listCopy.splice(itemIndex, 1);
+      dispatch({
+        type: "DELETE_TODO_ITEM",
+        payload: listCopy
+      });
+    } catch (error) {
+      alert("Something went wrong");
+      console.log(error);
+    }
+  };
+};
+
+export const completeTodo = id => {
+  return (dispatch, getState) => {
+    try {
+      const state = getState();
+      let listCopy = state.todo.list.slice();
+      let itemIndex = listCopy.findIndex(item => item.id === id);
+      let itemDetails = listCopy[itemIndex];
+      itemDetails.isCompleted = true;
+      itemDetails.completedAt = new Date().toISOString();
+      listCopy[itemIndex] = itemDetails;
+      dispatch({
+        type: "TODO_COMPLETED",
+        payload: listCopy
+      });
+    } catch (error) {
+      alert("Something went wrong");
+      console.log(error);
+    }
+  };
+};
