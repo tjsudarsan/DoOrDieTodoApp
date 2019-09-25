@@ -63,3 +63,23 @@ export const completeTodo = id => {
     }
   };
 };
+
+export const editTodoAction = (id, todoInput, deadLine) => {
+  return (dispatch, getState) => {
+    try {
+      const state = getState();
+      let listCopy = state.todo.list.slice();
+      let itemIndex = listCopy.findIndex(item => item.id === id);
+      let itemDetails = listCopy[itemIndex];
+      itemDetails.todo = todoInput;
+      itemDetails.deadLine = deadLine;
+      dispatch({
+        type: "EDIT_TODO",
+        payload: listCopy
+      });
+    } catch (error) {
+      alert("Something went wrong");
+      console.log(error);
+    }
+  };
+};

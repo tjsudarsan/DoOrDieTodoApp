@@ -2,7 +2,10 @@ import React, { Component } from "react";
 import DatePicker from "react-datepicker";
 import { connect } from "react-redux";
 
-import { addTodoItemAction } from "../redux/actions/actions-todo";
+import {
+  addTodoItemAction,
+  editTodoAction
+} from "../redux/actions/actions-todo";
 
 import "react-datepicker/dist/react-datepicker.css";
 
@@ -11,6 +14,15 @@ class TodoForm extends Component {
     deadLine: "",
     todoInput: ""
   };
+
+  componentDidMount() {
+    if (this.props.id) {
+      this.setState({
+        todoInput: this.props.todoInput,
+        deadLine: new Date(this.props.deadLine)
+      });
+    }
+  }
 
   todoInputChange = e => {
     if (e.target.value.length <= 100) {
@@ -32,12 +44,16 @@ class TodoForm extends Component {
       if (this.state.deadLine) {
         let todoInput = this.state.todoInput;
         let deadLine = this.state.deadLine.toISOString();
-        let isSuccess = this.props.addTodo(todoInput, deadLine);
-        if (isSuccess) {
-          this.setState({
-            todoInput: "",
-            deadLine: ""
-          });
+        if (this.props.id) {
+          this.props.editTodo(this.props.id, todoInput, deadLine);
+        } else {
+          let isSuccess = this.props.addTodo(todoInput, deadLine);
+          if (isSuccess) {
+            this.setState({
+              todoInput: "",
+              deadLine: ""
+            });
+          }
         }
       } else {
         alert("Please select deadline");
@@ -49,7 +65,7 @@ class TodoForm extends Component {
 
   render() {
     return (
-      <div className="row align-items-center">
+      <div className="row align-items-center w-100">
         <div className="col-12" style={{ textAlign: "center" }}>
           <form id="todoForm" onSubmit={this.handleSubmit} autoComplete="off">
             <div className="form-row">
@@ -77,9 +93,18 @@ class TodoForm extends Component {
                 />
               </div>
               <div className="col">
-                <button className="btn btn-success" type="submit">
-                  Add
+                <button className="btn btn-outline-success" type="submit">
+                  {this.props.id ? <i className="fa fa-save" /> : "Add"}
                 </button>
+                {this.props.id ? (
+                  <button
+                    onClick={this.props.cancelEdit}
+                    className="btn btn-outline-danger ml-2"
+                    type="button"
+                  >
+                    <i class="fas fa-times"></i>
+                  </button>
+                ) : null}
               </div>
             </div>
           </form>
@@ -91,7 +116,9 @@ class TodoForm extends Component {
 
 const mapDispatchToProps = dispatch => ({
   addTodo: (todoInput, deadLine) =>
-    dispatch(addTodoItemAction(todoInput, deadLine))
+    dispatch(addTodoItemAction(todoInput, deadLine)),
+  editTodo: (id, todoInput, deadLine) =>
+    dispatch(editTodoAction(id, todoInput, deadLine))
 });
 
 export default connect(

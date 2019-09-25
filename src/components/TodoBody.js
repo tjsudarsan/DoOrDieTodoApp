@@ -7,6 +7,7 @@ const TodoBody = () => {
   return (
     <React.Fragment>
       <TodoForm />
+      <hr />
       <TodoList />
     </React.Fragment>
   );

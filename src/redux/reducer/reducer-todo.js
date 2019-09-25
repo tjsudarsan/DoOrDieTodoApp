@@ -19,6 +19,11 @@ export default (state = defaultState, actions) => {
         ...state,
         list: actions.payload
       };
+    case "EDIT_TODO":
+      return {
+        ...state,
+        list: actions.payload
+      };
     default:
       return state;
   }
