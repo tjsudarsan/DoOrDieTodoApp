@@ -102,7 +102,7 @@ class TodoForm extends Component {
                     className="btn btn-outline-danger ml-2"
                     type="button"
                   >
-                    <i class="fas fa-times"></i>
+                    <i className="fas fa-times"></i>
                   </button>
                 ) : null}
               </div>
