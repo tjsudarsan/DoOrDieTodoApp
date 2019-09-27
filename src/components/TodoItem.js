@@ -60,7 +60,7 @@ class TodoItem extends Component {
                   />
                   <label
                     className="custom-control-label"
-                    htmlFor={this.props.id}
+                    htmlhtmlFor={this.props.id}
                   ></label>
                 </div>
               </div>

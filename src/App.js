@@ -1,9 +1,8 @@
 import React from "react";
-import "./css/style.css";
-import moment from "moment";
 import { Provider } from "react-redux";
 import store from "./redux/store";
 import { BrowserRouter } from "react-router-dom";
+import "./css/style.css";
 
 import Header from "./components/Header";
 import Footer from "./components/Footer";

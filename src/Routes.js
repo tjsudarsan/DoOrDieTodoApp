@@ -6,11 +6,19 @@ import Dashboard from "./containers/Dashboard";
 import AboutUs from "./containers/AboutUs";
 import NotFound from "./containers/NotFound";
 import Login from "./containers/Login";
+import Register from "./containers/Register";
 
 const Routes = props => {
   return (
     <Switch>
-      <Route path="/" component={props.isLoggedIn ? Dashboard : Login} exact />
+      {props.isLoggedIn ? (
+        <Route path="/" component={Dashboard} exact />
+      ) : (
+        <>
+          <Route path="/" component={Login} exact />
+          <Route path="/signup" component={Register} exact />
+        </>
+      )}
       <Route path="/aboutus" component={AboutUs} />
       <Route path="*" component={NotFound} />
     </Switch>

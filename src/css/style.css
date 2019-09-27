@@ -24,6 +24,7 @@ p {
   top: auto;
   user-select: none;
 }
+
 .todo-item-body {
   display: flex;
   align-items: center;
