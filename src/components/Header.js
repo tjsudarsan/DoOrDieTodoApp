@@ -2,6 +2,8 @@ import React from "react";
 import logo from "../assets/icons/list.svg";
 import moment from "moment";
 import { Link } from "react-router-dom";
+import firebase from "../firebase";
+import { connect } from "react-redux";
 class Header extends React.Component {
   state = {
     currentTime: moment().format("DD MMM YYYY hh:mm A")
@@ -61,10 +63,40 @@ class Header extends React.Component {
             </li>
           </ul>
         </div>
+        {this.props.isLoggedIn && (
+          <div class="dropdown">
+            <span
+              role="presentation"
+              data-toggle="dropdown"
+              aria-haspopup="true"
+              aria-expanded="false"
+              style={{ color: "white", marginRight: 20, cursor: "pointer" }}
+            >
+              {this.props.displayName}
+            </span>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+              <span
+                onClick={() => firebase.auth().signOut()}
+                style={{ cursor: "pointer" }}
+                class="dropdown-item"
+              >
+                Logout
+              </span>
+            </div>
+          </div>
+        )}
         <span style={{ color: "white" }}>{this.state.currentTime}</span>
       </nav>
     );
   }
 }
 
-export default Header;
+const mapStateToProps = state => ({
+  displayName: state.auth.userDetails.displayName,
+  isLoggedIn: state.auth.isLoggedIn
+});
+
+export default connect(
+  mapStateToProps,
+  null
+)(Header);

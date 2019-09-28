@@ -1,10 +1,35 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
+import firebase from "../firebase";
 
 class Login extends Component {
   state = {
-    email: "",
+    emailId: "",
     password: ""
+  };
+
+  handleChange = e => {
+    this.setState({
+      [e.target.name]: e.target.value
+    });
+  };
+
+  handleSubmit = async e => {
+    e.preventDefault();
+    try {
+      const { emailId, password } = this.state;
+      if (emailId && password) {
+        let data = await firebase
+          .auth()
+          .signInWithEmailAndPassword(emailId, password);
+        console.log(data);
+      } else {
+        throw new Error("Please enter email and password");
+      }
+    } catch (error) {
+      alert(error.message);
+      console.log(error);
+    }
   };
 
   render() {
@@ -16,15 +41,16 @@ class Login extends Component {
         <div className="col-4">
           <h3>Login</h3>
           <hr />
-          <form>
+          <form onSubmit={this.handleSubmit}>
             <div className="form-group">
               <label htmlFor="exampleInputEmail1">Email address</label>
               <input
                 type="email"
                 className="form-control"
-                id="exampleInputEmail1"
-                aria-describedby="emailHelp"
+                name="emailId"
                 placeholder="Enter email"
+                onChange={this.handleChange}
+                value={this.state.emailId}
               />
               <small id="emailHelp" className="form-text text-muted">
                 We'll never share your email with anyone else.
@@ -35,8 +61,10 @@ class Login extends Component {
               <input
                 type="password"
                 className="form-control"
-                id="exampleInputPassword1"
+                name="password"
                 placeholder="Password"
+                onChange={this.handleChange}
+                value={this.state.password}
               />
             </div>
             <button type="submit" className="btn btn-primary">

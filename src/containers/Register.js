@@ -1,5 +1,8 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import { Link } from "react-router-dom";
+
+import firebase from "../firebase";
 
 class Register extends Component {
   state = {
@@ -13,6 +16,31 @@ class Register extends Component {
       [e.target.name]: e.target.value
     });
   };
+
+  //We are using async to make the execution synchronous.
+  handleSubmit = async e => {
+    e.preventDefault();
+    try {
+      const { name, emailId, password } = this.state;
+      if (name && emailId && password) {
+        //Here we need to use await to resolve or reject the promise from firebase
+        let data = await firebase
+          .auth()
+          .createUserWithEmailAndPassword(emailId, password);
+        data.user.updateProfile({
+          displayName: name
+        });
+        if (data) {
+          alert("Registered Successfully");
+          this.props.history.replace("/");
+        }
+      }
+    } catch (error) {
+      alert(error.message);
+      console.log(error);
+    }
+  };
+
   render() {
     return (
       <div
@@ -22,7 +50,7 @@ class Register extends Component {
         <div className="col-6">
           <h3>Sign Up</h3>
           <hr />
-          <form>
+          <form onSubmit={this.handleSubmit}>
             <div className="form-row">
               <div className="form-group col-md-6">
                 <label htmlFor="inputEmail4">Name</label>
@@ -63,6 +91,9 @@ class Register extends Component {
             <button type="submit" className="btn btn-primary">
               Go
             </button>
+            <Link to="/" className="ml-2">
+              Login
+            </Link>
           </form>
         </div>
       </div>
