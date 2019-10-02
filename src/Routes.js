@@ -10,6 +10,7 @@ import Login from "./containers/Login";
 import Register from "./containers/Register";
 
 import { updateAuth } from "./redux/actions/actions-auth";
+import Loader from "./components/Loader";
 
 class Routes extends Component {
   state = {
@@ -35,18 +36,7 @@ class Routes extends Component {
 
   render() {
     if (this.state.loading) {
-      return (
-        <div
-          className="row align-items-center justify-content-center"
-          style={{ height: "70vh" }}
-        >
-          <div className="col" style={{ textAlign: "center" }}>
-            <div className="spinner-border text-success" role="status">
-              <span className="sr-only">Loading...</span>
-            </div>
-          </div>
-        </div>
-      );
+      return <Loader />;
     }
     return (
       <Switch>

@@ -64,9 +64,8 @@ class Header extends React.Component {
           </ul>
         </div>
         {this.props.isLoggedIn && (
-          <div class="dropdown">
+          <div className="dropdown">
             <span
-              role="presentation"
               data-toggle="dropdown"
               aria-haspopup="true"
               aria-expanded="false"
@@ -74,11 +73,11 @@ class Header extends React.Component {
             >
               {this.props.displayName}
             </span>
-            <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+            <div className="dropdown-menu" aria-labelledby="dropdownMenuLink">
               <span
                 onClick={() => firebase.auth().signOut()}
                 style={{ cursor: "pointer" }}
-                class="dropdown-item"
+                className="dropdown-item"
               >
                 Logout
               </span>

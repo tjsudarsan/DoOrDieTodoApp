@@ -27,7 +27,6 @@ class TodoItem extends Component {
   };
 
   render() {
-    console.log(this.props);
     return (
       <div className="card">
         <div className="card-body todo-item-body">
@@ -60,7 +59,7 @@ class TodoItem extends Component {
                   />
                   <label
                     className="custom-control-label"
-                    htmlhtmlFor={this.props.id}
+                    htmlFor={this.props.id}
                   ></label>
                 </div>
               </div>

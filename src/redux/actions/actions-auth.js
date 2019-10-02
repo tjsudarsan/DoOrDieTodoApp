@@ -1,5 +1,5 @@
 export const updateAuth = userDetails => {
-  return (dispatch, getState) => {
+  return dispatch => {
     try {
       if (userDetails) {
         dispatch({
